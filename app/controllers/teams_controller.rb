@@ -49,6 +49,16 @@ class TeamsController < ApplicationController
     @team = current_user.keep_team_id ? Team.find(current_user.keep_team_id) : current_user.teams.first
   end
 
+  def owner
+    @team = Team.friendly.find(params[:id])
+    @team.owner = @team.members.find(params[:user])
+    if @team.save
+      OwnerMailer.owner_mail(@team).deliver
+      redirect_to @team,notice: "リーダー権限を変更しました"
+    else
+      redirect_to @team,notice: "リーダー権限の変更に失敗しました"
+    end
+  end
   private
 
   def set_team
