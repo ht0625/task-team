@@ -24,11 +24,12 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.destroy
-      respond_to do |format|
-        format.js { render :index }
-      end
-    end
+    # if @comment.destroy
+    #   respond_to do |format|
+    #     format.js { render :index }
+    #   end
+    # end
+    respond_to { |format| format.js { render :index } } if @comment.destroy
   end
 
   private
