@@ -26,9 +26,9 @@ class AgendasController < ApplicationController
     if @agenda.user == current_user || @agenda.team.owner == current_user
       DeleteAgendaMailer.delete_agenda_mail(@agenda).deliver
       @agenda.destroy
-      redirect_to dashboard_path, notice:"アジェンダを削除しました"
+      redirect_to dashboard_path, notice: "アジェンダを削除しました"
     else
-      redirect_to dashboard_path, notice:"アジェンダを削除する権限がありません"
+      redirect_to dashboard_path, notice: "アジェンダを削除する権限がありません"
     end
   end
 

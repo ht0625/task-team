@@ -54,11 +54,12 @@ class TeamsController < ApplicationController
     @team.owner = @team.members.find(params[:user])
     if @team.save
       OwnerMailer.owner_mail(@team).deliver
-      redirect_to @team,notice: "リーダー権限を変更しました"
+      redirect_to @team, notice: "リーダー権限を変更しました"
     else
-      redirect_to @team,notice: "リーダー権限の変更に失敗しました"
+      redirect_to @team, notice: "リーダー権限の変更に失敗しました"
     end
   end
+
   private
 
   def set_team
